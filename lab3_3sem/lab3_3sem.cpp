@@ -81,10 +81,8 @@ public:
 
 	//Алгоритм Беллмана Форда
 	void bellman_ford_algorithm(int index_of_source_node) {
-		for (int i = 0; i < number_of_vertices; i++) {
+		for (int i = 0; i < number_of_vertices; i++)
 			shortest_distances[i] = INT32_MAX;
-			state[i] = false;
-		}
 
 		shortest_distances[index_of_source_node] = 0;
 		for (int i = 1; i <= number_of_vertices - 1; i++)
