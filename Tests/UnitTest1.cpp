@@ -12,7 +12,7 @@ namespace UnitTest1
 		
 		TEST_METHOD(TestMethod1)
 		{
-			Graph<int> gr(5);
+			Graph gr(5);
 			gr.set_an_element(0, 0, 0);
 			gr.set_an_element(0, 1, 1);
 			gr.set_an_element(0, 2, 0);
@@ -56,7 +56,7 @@ namespace UnitTest1
 
 		TEST_METHOD(TestMethod2)
 		{
-			Graph<int> gr(5);
+			Graph gr(5);
 			gr.set_an_element(0, 0, 0);
 			gr.set_an_element(0, 1, 1);
 			gr.set_an_element(0, 2, 0);
@@ -100,7 +100,7 @@ namespace UnitTest1
 
 		TEST_METHOD(TestMethod3)
 		{
-			Graph<int> gr(5);
+			Graph gr(5);
 			gr.set_an_element(0, 0, 0);
 			gr.set_an_element(0, 1, 1);
 			gr.set_an_element(0, 2, 0);

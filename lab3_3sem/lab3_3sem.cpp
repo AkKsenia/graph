@@ -2,28 +2,27 @@
 #include <stack>
 using namespace std;
 
-template<class T>
 class Graph {
 public:
 	int number_of_vertices;
-	T** data;
+	int** data;
 	int* shortest_distances;
 	bool* state;
 public:
 	Graph(int amount_) {
 		this->number_of_vertices = amount_;
 
-		data = new T * [amount_];
+		data = new int * [amount_];
 		shortest_distances = new int[amount_];
 		state = new bool[amount_];
 
 		for (int i = 0; i < amount_; i++) {
-			data[i] = new T[amount_];
+			data[i] = new int[amount_];
 			shortest_distances[i] = INT32_MAX;
 			state[i] = false;
 		}
 	}
-	Graph(const Graph<T>& other) {
+	Graph(const Graph& other) {
 		number_of_vertices = other.number_of_vertices;
 		for (int i = 0; i < number_of_vertices; i++) {
 			for (int j = 0; j < number_of_vertices; j++)
@@ -41,7 +40,7 @@ public:
 	}
 
 	void fill_the_graph() {
-		T data_;
+		int data_;
 		for (int i = 0; i < number_of_vertices; i++) {
 			for (int j = 0; j < number_of_vertices; j++) {
 				cout << "Задайте длину пути между вершинами " << i << " и " << j << ": ";
@@ -103,7 +102,7 @@ public:
 	}
 
 	//Топологическая сортировка
-	void all_the_way(const T& vertex, stack<T>& stack) {
+	void all_the_way(int vertex, stack<int>& stack) {
 		state[vertex] = true;
 		for (int i = 0; i < number_of_vertices; i++)
 			if (data[vertex][i] != 0)
@@ -116,7 +115,7 @@ public:
 		for (int i = 0; i < number_of_vertices; i++)
 			state[i] = false;
 
-		stack<T> stack;
+		stack<int> stack;
 		for (int i = 0; i < number_of_vertices; i++)
 			if (!state[i]) {
 				all_the_way(i, stack);
@@ -133,9 +132,9 @@ public:
 		for (int i = 0; i < number_of_vertices; i++)
 			shortest_distances[i] = INT32_MAX;
 
-		T** data_ = new T * [number_of_vertices];
+		int** data_ = new int * [number_of_vertices];
 		for (int i = 0; i < number_of_vertices; i++)
-			data_[i] = new T[number_of_vertices];
+			data_[i] = new int[number_of_vertices];
 
 		for (int i = 0; i < number_of_vertices; i++)
 			for (int j = 0; j < number_of_vertices; j++) {
