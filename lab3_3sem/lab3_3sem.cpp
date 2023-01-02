@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stack>
+#include <queue>
 using namespace std;
 
 class Graph {
@@ -8,6 +9,7 @@ public:
 	int** data;
 	int* shortest_distances;
 	bool* state;
+	int* traverse;
 public:
 	Graph(int amount_) {
 		this->number_of_vertices = amount_;
@@ -15,11 +17,13 @@ public:
 		data = new int * [amount_];
 		shortest_distances = new int[amount_];
 		state = new bool[amount_];
+		traverse = new int[amount_];
 
 		for (int i = 0; i < amount_; i++) {
 			data[i] = new int[amount_];
 			shortest_distances[i] = INT32_MAX;
 			state[i] = false;
+			traverse[i] = -1;
 		}
 	}
 	Graph(const Graph& other) {
@@ -29,6 +33,7 @@ public:
 				data[i][j] = other.data[i][j];
 			shortest_distances[i] = other.shortest_distances[i];
 			state[i] = other.state[i];
+			traverse[i] = other.traverse[i];
 		}
 	}
 	~Graph() {
@@ -37,6 +42,7 @@ public:
 		delete[] data;
 		delete[] shortest_distances;
 		delete[] state;
+		delete[] traverse;
 	}
 
 	void fill_the_graph() {
@@ -153,6 +159,34 @@ public:
 		for (int i = 0; i < number_of_vertices; i++)
 			delete[] data_[i];
 		delete[] data_;
+	}
+
+	//Обход в ширину
+	void BFS(int index_of_source_node) {
+		for (int i = 0; i < number_of_vertices; i++) {
+			state[i] = false;
+			traverse[i] = -1;
+		}
+
+		int counter = 0;
+
+		queue<int> queue;
+		state[index_of_source_node] = true;
+		queue.push(index_of_source_node);
+
+		while (!queue.empty()) {
+			index_of_source_node = queue.front();
+			traverse[counter] = index_of_source_node;
+			++counter;
+			queue.pop();
+
+			for (int j = 0; j < number_of_vertices; j++)
+				if (data[index_of_source_node][j] != 0)
+					if (!state[j]) {
+						state[j] = true;
+						queue.push(j);
+					}
+		}
 	}
 
 	//Поиск кратчайшего пути

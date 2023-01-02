@@ -141,5 +141,49 @@ namespace UnitTest1
 					++elem_actual;
 			Assert::AreEqual(elem_expected, elem_actual);
 		}
+
+		TEST_METHOD(TestMethod4)
+		{
+			Graph gr(5);
+			gr.set_an_element(0, 0, 0);
+			gr.set_an_element(0, 1, 1);
+			gr.set_an_element(0, 2, 0);
+			gr.set_an_element(0, 3, 0);
+			gr.set_an_element(0, 4, 0);
+
+			gr.set_an_element(1, 0, 0);
+			gr.set_an_element(1, 1, 0);
+			gr.set_an_element(1, 2, 0);
+			gr.set_an_element(1, 3, 6);
+			gr.set_an_element(1, 4, 0);
+
+			gr.set_an_element(2, 0, 0);
+			gr.set_an_element(2, 1, 0);
+			gr.set_an_element(2, 2, 0);
+			gr.set_an_element(2, 3, 7);
+			gr.set_an_element(2, 4, 0);
+
+			gr.set_an_element(3, 0, 0);
+			gr.set_an_element(3, 1, 0);
+			gr.set_an_element(3, 2, 7);
+			gr.set_an_element(3, 3, 0);
+			gr.set_an_element(3, 4, 5);
+
+			gr.set_an_element(4, 0, 0);
+			gr.set_an_element(4, 1, 0);
+			gr.set_an_element(4, 2, 0);
+			gr.set_an_element(4, 3, 0);
+			gr.set_an_element(4, 4, 0);
+
+			gr.BFS(0);
+
+			int elem_expected = 5;
+			int elem_actual = 0;
+			int arr[5] = { 0,1,3,2,4 };
+			for (int i = 0; i < 5; i++)
+				if (arr[i] == gr.traverse[i])
+					++elem_actual;
+			Assert::AreEqual(elem_expected, elem_actual);
+		}
 	};
 }
