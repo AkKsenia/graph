@@ -5,7 +5,7 @@ using namespace std;
 //Необходимо найти кратчайший путь от начальной клетки до конечной
 
 class Matrix {
-private:
+public:
 	int** data;
 	int number_of_cells_horizontally;
 	int number_of_cells_vertically;
@@ -146,7 +146,7 @@ public:
 				counting_paths(i_, j_ - 1);
 			}
 	}
-	void processing() {
+	int processing() {
 		transform();
 		counting_paths(origin_coordinate_i, origin_coordinate_j);
 
@@ -172,17 +172,20 @@ public:
 		}
 
 		if (key_1 == 1) {
-			cout << "Кратчайшее расстояние равно: " << key_1 << endl;
+			cout << "Кратчайшее расстояние равно: ";
+			return key_1;
 		}
 		else {
 			if (key > 0) {
 				for (int i = 0; i < 4; i++)
 					if (number[i] > 0 && number[i] < min)
 						min = number[i];
-				cout << "Кратчайшее расстояние равно: " << min + 2 << endl;
+				cout << "Кратчайшее расстояние равно: ";
+				return min + 2;
 			}
 			else {
-				cout << "Невозможно проложить маршрут от начальной координаты до конечной!" << endl;
+				cout << "Невозможно проложить маршрут от начальной координаты до конечной! Программа завершила работу с кодом: " << endl;
+				return -1;
 			}
 		}
 	}
@@ -201,7 +204,7 @@ int main() {
 	Matrix matrix(number_of_cells_vertically, number_of_cells_horizontally);
 	matrix.fill_the_matrix();
 
-	matrix.processing();
+	cout << matrix.processing() << endl;
 
 	return 0;
 }
